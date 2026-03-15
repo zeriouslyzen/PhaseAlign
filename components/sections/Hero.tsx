@@ -40,8 +40,8 @@ export function Hero() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
     >
-      {/* Background extends under nav – no gap; overflow only here so content isn't clipped */}
-      <div className="absolute inset-0 overflow-hidden">
+      {/* Background extends under nav – no gap; overflow only here so content isn't clipped. Dark bg avoids grey flash during image transition. */}
+      <div className="absolute inset-0 overflow-hidden bg-[var(--gray-900)]">
         <AnimatePresence initial={false} mode="wait">
           <motion.div
             key={currentId}
@@ -101,7 +101,7 @@ export function Hero() {
             <Button href="/shop" size="md">
               Shop
             </Button>
-            <Button href="/learn" variant="outline" size="md">
+            <Button href="/learn" variant="cyber" size="sm">
               Learn more
             </Button>
           </motion.div>
