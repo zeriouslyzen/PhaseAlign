@@ -20,13 +20,16 @@ export function PhaseAlignmentLogo() {
 
   const logoStyle = {
     fontFamily: "var(--font-logo)",
-    letterSpacing: "0.18em",
+    paddingBottom: "6px",
+    display: "inline-block",
+    overflow: "visible",
+    lineHeight: 1.1,
   };
 
   return (
     <Link
       href="/"
-      className="logo-pulse relative z-10 inline-block min-w-[4ch] text-sm font-bold text-white sm:text-base"
+      className="logo-pulse relative z-10 inline-block min-w-[4ch] text-sm font-bold text-white sm:text-base leading-tight overflow-visible"
       style={logoStyle}
       aria-label="Phase Alignment – Home"
     >

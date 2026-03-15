@@ -33,58 +33,62 @@ export function Header() {
     }
   }, [open]);
 
+  const headerHeight = "3.5rem";
   return (
     <motion.header
-      className="sticky top-0 z-50 w-full overflow-visible"
-      style={{ height: "3.25rem", minHeight: "3.25rem" }}
+      className="sticky top-0 z-[100] w-full"
+      style={{ height: headerHeight, minHeight: headerHeight, overflow: "visible" }}
     >
       {/* Bar = only this SVG; curve bulges down */}
       <svg
         width="100%"
-        height="52"
-        viewBox="0 0 1000 52"
+        height="56"
+        viewBox="0 0 1000 42"
         preserveAspectRatio="none"
-        className="absolute left-0 top-0 block w-full overflow-visible pointer-events-none"
-        style={{ height: "3.25rem" }}
+        className="absolute left-0 top-0 block w-full pointer-events-none"
+        style={{ height: headerHeight }}
         aria-hidden
       >
         <defs>
           <clipPath id="nav-bar-clip" clipPathUnits="objectBoundingBox">
-            {/* Same curve as bar: 36/52 ≈ 0.692, 500/1000=0.5 */}
-            <path d="M 0 0 L 1 0 L 1 0.692 Q 0.5 1 0 0.692 Z" />
+            <path d="M 0 0 L 1 0 L 1 0.75 Q 0.5 1 0 0.75 Z" />
           </clipPath>
         </defs>
         <path
-          d="M 0 0 L 1000 0 L 1000 36 Q 500 52 0 36 Z"
+          d="M 0 0 L 1000 0 L 1000 28 Q 500 42 0 28 Z"
           fill="#000"
         />
       </svg>
-      {/* Formulas layer – clipped to bar curve so they don't spill past */}
+      {/* Formulas layer – clipped to bar curve */}
       <div
         className="absolute inset-0 z-0 overflow-hidden pointer-events-none"
         style={{ clipPath: "url(#nav-bar-clip)" }}
       >
         <NavBarBackground />
       </div>
-      {/* Nav: logo centered, dropdown right; py allows descenders (g) to show */}
-      <div className="absolute inset-x-0 top-0 z-10 flex min-h-[3.25rem] max-w-6xl mx-auto px-4 sm:px-6 items-center">
+      {/* Nav: one flex row so logo and menu are siblings with align-items: center = same horizontal line */}
+      <div
+        className="absolute inset-0 z-10 flex overflow-visible px-4 sm:px-6 items-center justify-between"
+        style={{ minHeight: headerHeight }}
+      >
         <div className="flex-1 min-w-0" aria-hidden />
-        <div className="absolute left-1/2 -translate-x-1/2 flex-shrink-0 py-1">
+        <div className="logo-wrapper-nav flex items-center justify-center flex-1 min-h-9 min-w-0">
           <PhaseAlignmentLogo />
         </div>
-        <div className="flex-1 flex justify-end min-w-0" ref={menuRef}>
+        <div className="flex items-center justify-end flex-1 min-h-9 min-w-0 -mt-5" ref={menuRef}>
           <div className="relative">
             <button
               type="button"
               onClick={() => setOpen((o) => !o)}
-              className="flex items-center gap-1.5 text-sm font-medium text-white/80 hover:text-white transition-colors py-1.5 px-2 rounded"
+              className="nav-menu-trigger flex items-center gap-[var(--nav-menu-gap)] text-sm font-medium text-white/80 hover:text-white transition-colors rounded h-9 px-3 py-2 leading-none"
+              style={{ letterSpacing: "0.06em", fontFamily: "var(--font-logo)" }}
               aria-expanded={open}
               aria-haspopup="true"
               aria-label="Menu"
             >
               Menu
               <svg
-                className={`w-4 h-4 transition-transform ${open ? "rotate-180" : ""}`}
+                className={`w-4 h-4 shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -96,26 +100,27 @@ export function Header() {
             <AnimatePresence>
               {open && (
                 <motion.div
-                  initial={{ opacity: 0, y: -4 }}
+                  initial={{ opacity: 0, y: -6 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -4 }}
-                  transition={{ duration: 0.15 }}
-                  className="absolute right-0 top-full mt-1 py-1.5 min-w-[8rem] rounded-md bg-black/95 border border-white/10 shadow-xl z-50"
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                  className="nav-dropdown-panel absolute right-0 top-full z-50"
+                  style={{ marginTop: "var(--nav-dropdown-gap)" }}
                   role="menu"
                 >
-                  {links.map((item) => (
+                  {links.map((item, i) => (
                     <Link
                       key={item.href}
                       href={item.href}
                       role="menuitem"
                       onClick={() => setOpen(false)}
-                      className="block px-4 py-2 text-sm text-white/80 hover:text-white hover:bg-white/5 transition-colors"
+                      className="nav-dropdown-item"
                     >
                       {item.label}
                     </Link>
                   ))}
-                  <div className="border-t border-white/10 my-1" />
-                  <div className="px-4 py-2 [&_a]:text-white/80 [&_a]:hover:text-white [&_a]:text-sm [&_a]:font-medium">
+                  <div className="nav-dropdown-divider" />
+                  <div className="nav-dropdown-cart [&_a]:text-white/85 [&_a]:hover:text-white [&_a]:text-[0.8125rem] [&_a]:font-medium [&_a]:tracking-[0.04em]">
                     <CartCount />
                   </div>
                 </motion.div>

@@ -1,6 +1,45 @@
 # Phase Alignment – Audit Summary
 
-Audit scope: users, paths, admin, security, SEO. No design changes. Last updated after implementing fixes below.
+Audit scope: users, paths, admin, security, SEO, UI/nav. Last updated after implementing fixes below.
+
+---
+
+## Browser verification (mandatory)
+
+**Rule:** Every UI, layout, or visual change must be verified in the browser before marking done. Use cursor-ide-browser: navigate or reload to the relevant URL, then snapshot + screenshot. Report what you see; do not assume.
+
+**Last browser check:** Homepage at `http://localhost:3000/` (after nav metrics + dropdown):
+- Header: 5rem bar; logo centered; nav uses 8px-grid padding (px-4 / px-6). Menu trigger: 44px min-height, 12px gap to chevron, 0.06em letter-spacing; right-aligned.
+- Dropdown: glass panel (backdrop blur, dark bg), gradient accent line on top, metric padding (--nav-dropdown-item-px/py), divider gradient; items Shop, Account, Cart; open/close animation 0.2s ease-out.
+- Hero and sections present; page loads.
+
+If your browser shows something different (blank page, old logo, wrong port): hard refresh (Cmd+Shift+R), confirm dev server is running on 3000, or run `rm -rf .next && npm run dev` then reload.
+
+---
+
+## Code audit: nav and logo (where it is controlled)
+
+If the nav or logo does not update in the browser, the following files are the only ones that render them. Edits must be in these places; then clear build cache and hard-refresh.
+
+| What | File | Lines (approx) |
+|------|------|----------------|
+| Layout wraps Header (not on /admin) | `components/layout/ConditionalSiteLayout.tsx` | 4, 20 |
+| Nav bar + logo wrapper | `components/layout/Header.tsx` | 36–77 (header height 4.5rem, SVG, grid, logo wrapper) |
+| Logo text + collapse to "Align" | `components/ui/PhaseAlignmentLogo.tsx` | 9–59 (text, font, paddingBottom) |
+| Hero overlap with nav | `components/sections/Hero.tsx` | -mt-[4.5rem], pt-[9rem] |
+| Logo + nav styles | `app/globals.css` | .logo-wrapper-nav, .logo-pulse (see below) |
+
+**Logo:** Header uses a 3-column grid (`grid-cols-[1fr_auto_1fr]`); logo sits in the center column. `.logo-wrapper-nav` in `globals.css` uses `transform: translateY(-18px)` and `padding-bottom: 14px` so the "g" descender is not clipped. Logo font is Orbitron (`--font-logo`); `.logo-pulse` adds letter-spacing, glow, and stroke.
+
+**After changing any of the above:** From project root run `rm -rf .next` then `npm run dev`. In the browser do a hard refresh (Cmd+Shift+R or Ctrl+Shift+R). Then verify in browser (see Browser verification above).
+
+---
+
+## UI / Nav (logo and bar)
+
+- **Nav bar:** Header height 4.5rem; SVG bar and formulas clipped to curve (`clipPath`). Hero uses `-mt-[4.5rem]` and `pt-[9rem]` so background runs under nav and content starts below the bar.
+- **Logo ("Phase Alignment" / "Align"):** Centered via 3-column grid; scroll collapse to "Align" after 72px. Orbitron font (cyber style), letter-spacing 0.2em, glow pulse. `.logo-wrapper-nav`: `translateY(-18px)`, `padding-bottom: 14px` so "g" is not clipped.
+- **If logo "g" still clips:** Hard refresh; clear build cache (`rm -rf .next` then `npm run dev`). If still clipped, increase `padding-bottom` in `.logo-wrapper-nav` or the translateY value in globals.css.
 
 ---
 

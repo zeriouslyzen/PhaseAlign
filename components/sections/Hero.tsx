@@ -35,7 +35,7 @@ export function Hero() {
 
   return (
     <motion.section
-      className="relative -mt-[3.25rem] min-h-[42vw] border-b border-[var(--border)] pt-[3.25rem] pb-2 overflow-visible sm:min-h-[220px]"
+      className="relative -mt-[3.5rem] min-h-[42vw] border-b border-[var(--border)] pt-[5rem] pb-2 overflow-visible sm:min-h-[220px]"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
