@@ -5,6 +5,7 @@ import { CartProvider } from "@/context/CartContext";
 import { SessionProvider } from "@/components/providers/SessionProvider";
 import { ConditionalSiteLayout } from "@/components/layout/ConditionalSiteLayout";
 import { OrganizationWebSiteSchema } from "@/components/seo/OrganizationWebSiteSchema";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import { BASE_URL, SITE_NAME, DEFAULT_DESCRIPTION } from "@/lib/site";
 
 const outfit = Outfit({
@@ -92,6 +93,7 @@ export default function RootLayout({
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
+        <ScrollToTop />
         <SessionProvider>
           <CartProvider>
             <ConditionalSiteLayout>{children}</ConditionalSiteLayout>
