@@ -104,7 +104,26 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  white-space: nowrap; /* keep "Phase Alignment" on one line on mobile */
+  white-space: nowrap !important; /* keep "Phase Alignment" on one line; overrides inline */
+}
+
+/* Bottom nav: full-width bar, modular buttons, logo font, <1in height */
+.bottom-nav {
+  flex-shrink: 0;
+}
+.bottom-nav .bottom-nav-btn {
+  letter-spacing: 0.06em;
+}
+.bottom-nav-cart-link {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  font-family: var(--font-logo);
+}
+.bottom-nav-cart-link:hover {
+  color: #fff;
 }
 
 /* Nav metrics: 8px base unit; use for alignment and spacing */

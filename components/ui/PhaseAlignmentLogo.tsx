@@ -24,6 +24,7 @@ export function PhaseAlignmentLogo() {
     display: "inline-block",
     overflow: "visible",
     lineHeight: 1.1,
+    whiteSpace: "nowrap" as const,
   };
 
   return (
