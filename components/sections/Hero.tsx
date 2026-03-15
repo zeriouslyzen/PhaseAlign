@@ -81,7 +81,7 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, delay: 0.05 }}
             >
-              You’re not separate from the physics. You’re where they’re happening. We tune the conditions.
+              Herbal blends, performance supplements, health tech, guides & instructional.
             </motion.h1>
             <motion.p
               className="mt-1.5 text-xs text-white/90 drop-shadow sm:text-sm"
@@ -89,7 +89,7 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, delay: 0.1 }}
             >
-              Bioelectric. Mechanical. Environmental. Stored potential, waiting on the right dials.
+              East meets west. Science-backed.
             </motion.p>
           </div>
           <motion.div
@@ -101,8 +101,8 @@ export function Hero() {
             <Button href="/shop" size="md">
               Shop
             </Button>
-            <Button href="/shop?cat=herbal-blends" variant="outline" size="md">
-              Herbs
+            <Button href="/learn" variant="outline" size="md">
+              Learn more
             </Button>
           </motion.div>
         </div>

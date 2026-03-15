@@ -32,7 +32,7 @@ const syne = Syne({
 export const metadata: Metadata = {
   title: "Phase Alignment | Herbs, Performance, Health Tech",
   description:
-    "East meets west. Scientifically done. Herbal blends, wholesale herbs, performance supplements, and health tech. No fluff, no backdoors.",
+    "Herbal blends, performance supplements, health tech, guides & instructional. East meets west. Science-backed.",
 };
 
 export default function RootLayout({
