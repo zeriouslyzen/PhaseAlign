@@ -20,7 +20,7 @@ export function ConditionalSiteLayout({
     <>
       <Header />
       <div className="flex min-h-0 flex-1 flex-col pb-12">
-        <main className="relative z-0 flex-1">{children}</main>
+        <main id="main-content" className="relative z-0 flex-1" role="main">{children}</main>
         <Footer />
       </div>
       <BottomNav />

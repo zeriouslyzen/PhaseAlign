@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { canonical } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Contact | Phase Alignment",
-  description: "Get in touch. Signal or email.",
+  title: "Contact",
+  description: "Contact Phase Alignment. Signal or email. Customer service and inquiries.",
+  openGraph: {
+    title: "Contact | Phase Alignment",
+    description: "Get in touch. Signal or email.",
+    url: canonical("/contact"),
+  },
+  alternates: { canonical: canonical("/contact") },
 };
 
 const CONTACT_EMAIL = "signal@jackdanger.dev";

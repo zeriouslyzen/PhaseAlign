@@ -2,11 +2,19 @@ import type { Metadata } from "next";
 import { getProducts } from "@/lib/products";
 import { getStackProductSlugs } from "@/lib/stacks";
 import { StacksBuilder } from "./StacksBuilder";
+import { canonical } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Build a stack | Phase Alignment",
+  title: "Build a stack",
   description:
     "Build a stack by goal, current state, or enhancement. Products matched to physiological targets: recovery, sleep, stress, energy, focus, environmental. Scientific framework.",
+  openGraph: {
+    title: "Build a stack | Phase Alignment",
+    description:
+      "Build a stack by physiological targets. Recovery, sleep, stress, energy, focus. Evidence-based.",
+    url: canonical("/stacks"),
+  },
+  alternates: { canonical: canonical("/stacks") },
 };
 
 export default function StacksPage() {

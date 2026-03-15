@@ -307,3 +307,33 @@ html {
 .animate-scale-in {
   animation: scale-in var(--duration-normal) var(--ease-out) forwards;
 }
+
+/* Skip link: visually hidden until focused (accessibility). */
+.skip-link {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.skip-link:focus {
+  position: fixed;
+  top: 0.75rem;
+  left: 1rem;
+  z-index: 9999;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 0.75rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  background: var(--fg);
+  color: var(--bg);
+  border-radius: var(--radius);
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}

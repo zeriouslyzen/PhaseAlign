@@ -5,6 +5,8 @@ import { getProductBySlug, getProducts } from "@/lib/products";
 import { getProductDisplayImage } from "@/lib/product-image";
 import { ProductActions } from "@/components/products/ProductActions";
 import { TRADITIONS, getTradition } from "@/lib/classifications";
+import { ProductSchema } from "@/components/seo/ProductSchema";
+import { canonical } from "@/lib/site";
 
 function formatPrice(cents: number): string {
   return new Intl.NumberFormat("en-US", {
@@ -27,13 +29,20 @@ export async function generateMetadata({
   const { slug } = await params;
   const product = getProductBySlug(slug);
   if (!product) return { title: "Product not found" };
+  const productUrl = canonical(`/products/${slug}`);
+  const imgSrc = getProductDisplayImage(product);
+  const imageUrl = imgSrc.startsWith("http") ? imgSrc : canonical(imgSrc.startsWith("/") ? imgSrc : `/${imgSrc}`);
   return {
-    title: `${product.name} | Phase Alignment`,
+    title: product.name,
     description: product.shortDescription,
     openGraph: {
       title: product.name,
       description: product.shortDescription,
+      url: productUrl,
+      type: "website",
+      images: [{ url: imageUrl, alt: product.name }],
     },
+    alternates: { canonical: productUrl },
   };
 }
 
@@ -48,12 +57,13 @@ export default async function ProductPage({
 
   return (
     <div className="min-h-screen">
+      <ProductSchema product={product} slug={slug} />
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
-        <nav className="mb-6 text-sm text-[var(--gray-600)]">
+        <nav className="mb-6 text-sm text-[var(--gray-600)]" aria-label="Breadcrumb">
           <Link href="/shop" className="text-[var(--link)] hover:text-[var(--link-hover)]">
             Shop
           </Link>
-          <span className="mx-2">/</span>
+          <span className="mx-2" aria-hidden="true">/</span>
           <span className="text-[var(--foreground)]">{product.name}</span>
         </nav>
 
@@ -61,8 +71,10 @@ export default async function ProductPage({
           <div className="aspect-square overflow-hidden rounded-[var(--radius-lg)] bg-[var(--gray-100)]">
             <img
               src={getProductDisplayImage(product)}
-              alt=""
+              alt={product.name}
               className="h-full w-full object-cover"
+              width={600}
+              height={600}
             />
           </div>
 

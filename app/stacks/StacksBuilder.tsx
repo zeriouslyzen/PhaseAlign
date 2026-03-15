@@ -301,8 +301,10 @@ export function StacksBuilder({ products }: StacksBuilderProps) {
                       <div className="h-10 w-10 shrink-0 overflow-hidden rounded bg-[var(--gray-100)]">
                         <img
                           src={getProductDisplayImage(product)}
-                          alt=""
+                          alt={product.name}
                           className="h-full w-full object-cover"
+                          width={40}
+                          height={40}
                         />
                       </div>
                       <div className="min-w-0 flex-1">

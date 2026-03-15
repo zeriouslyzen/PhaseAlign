@@ -8,6 +8,7 @@ export function Header() {
   const headerHeight = "3.5rem";
   return (
     <motion.header
+      role="banner"
       className="sticky top-0 z-[100] w-full"
       style={{ height: headerHeight, minHeight: headerHeight, overflow: "visible" }}
     >

@@ -29,17 +29,19 @@ export function Footer() {
   }
 
   return (
-    <footer className="border-t border-[var(--border)] bg-[var(--gray-50)]">
+    <footer role="contentinfo" className="border-t border-[var(--border)] bg-[var(--gray-50)]">
       <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
         <div className="flex flex-col gap-6 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
           {/* Newsletter - modular small */}
           <div className="shrink-0">
-            <p className="text-xs font-medium text-[var(--gray-600)]">
+            <p id="newsletter-label" className="text-xs font-medium text-[var(--gray-600)]">
               Updates on the frontier
             </p>
             <form
               onSubmit={handleNewsletterSubmit}
               className="mt-1 flex gap-1"
+              aria-labelledby="newsletter-label"
+              aria-describedby={newsletterStatus === "error" ? "newsletter-error" : undefined}
             >
               <input
                 type="email"
@@ -49,22 +51,26 @@ export function Footer() {
                 className="h-8 w-48 max-w-full rounded border border-[var(--border)] bg-[var(--bg-card)] px-2 text-xs text-[var(--fg)] placeholder:text-[var(--gray-400)] focus:border-[var(--link)] focus:outline-none"
                 disabled={newsletterStatus === "loading"}
                 aria-label="Email for newsletter"
+                autoComplete="email"
               />
               <button
                 type="submit"
                 disabled={newsletterStatus === "loading"}
                 className="h-8 shrink-0 rounded bg-[var(--fg)] px-2.5 text-xs font-medium text-[var(--bg)] hover:opacity-90 disabled:opacity-60"
+                aria-busy={newsletterStatus === "loading"}
               >
                 {newsletterStatus === "loading" ? "…" : newsletterStatus === "done" ? "Done" : "Subscribe"}
               </button>
             </form>
             {newsletterStatus === "error" && (
-              <p className="mt-1 text-[10px] text-red-600">Something went wrong. Try again.</p>
+              <p id="newsletter-error" className="mt-1 text-[10px] text-red-600" role="alert">
+                Something went wrong. Try again.
+              </p>
             )}
           </div>
 
           {/* Links - horizontal */}
-          <nav className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[var(--gray-600)]">
+          <nav aria-label="Footer navigation" className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[var(--gray-600)]">
             <Link href="/about" className="text-[var(--link)] hover:text-[var(--link-hover)]">
               About
             </Link>

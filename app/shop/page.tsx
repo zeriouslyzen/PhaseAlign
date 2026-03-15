@@ -5,10 +5,19 @@ import { ProductGrid } from "@/components/sections/ProductGrid";
 import { getCategories, getProducts, getProductsByCategory } from "@/lib/products";
 import { ShopFilters } from "./ShopFilters";
 import { ShopSearch } from "./ShopSearch";
+import { canonical } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Shop | Phase Alignment",
-  description: "Herbal blends, wholesale herbs, performance supplements, health tech. No fluff, no backdoors.",
+  title: "Shop",
+  description:
+    "Shop herbal blends, performance supplements, health tech. TCM, adaptogens, recovery, sleep, stress. Physiology-first. No fluff, no backdoors.",
+  openGraph: {
+    title: "Shop | Phase Alignment",
+    description:
+      "Herbal blends, performance supplements, health tech. Physiology-first, evidence-based.",
+    url: canonical("/shop"),
+  },
+  alternates: { canonical: canonical("/shop") },
 };
 
 type SearchParams = { cat?: string; q?: string };

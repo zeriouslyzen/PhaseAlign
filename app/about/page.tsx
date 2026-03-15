@@ -1,10 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { canonical } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "About | Phase Alignment",
+  title: "About",
   description:
     "A small team of engineers, trainers, and scientists. East meets west. Performance, physiology, and the frontiers of science.",
+  openGraph: {
+    title: "About | Phase Alignment",
+    description:
+      "Engineers, trainers, scientists. East meets west. Performance, physiology, frontiers of science.",
+    url: canonical("/about"),
+  },
+  alternates: { canonical: canonical("/about") },
 };
 
 const sections = [

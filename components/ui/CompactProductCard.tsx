@@ -32,8 +32,10 @@ export function CompactProductCard({ product, index = 0 }: CompactProductCardPro
         <div className="h-14 w-14 shrink-0 overflow-hidden rounded-[var(--radius)] bg-[var(--gray-100)]">
           <img
             src={getProductDisplayImage(product)}
-            alt=""
+            alt={product.name}
             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            width={300}
+            height={300}
           />
         </div>
         <div className="min-w-0 flex-1">
