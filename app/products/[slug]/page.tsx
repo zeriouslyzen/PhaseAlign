@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { getProductBySlug, getProducts } from "@/lib/products";
 import { getProductDisplayImage } from "@/lib/product-image";
 import { ProductActions } from "@/components/products/ProductActions";
+import { TRADITIONS, getTradition } from "@/lib/classifications";
 
 function formatPrice(cents: number): string {
   return new Intl.NumberFormat("en-US", {
@@ -85,6 +86,44 @@ export default async function ProductPage({
             <p className="mt-6 text-[var(--gray-700)]">
               {product.longDescription}
             </p>
+            {(product.traditions?.length ?? 0) > 0 && (
+              <div className="mt-6 space-y-2 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--gray-50)] p-4">
+                <p className="text-xs font-medium uppercase tracking-wider text-[var(--gray-500)]">
+                  Classification
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {product.traditions!.map((tid) => {
+                    const t = getTradition(tid);
+                    return t ? (
+                      <span
+                        key={tid}
+                        className="inline-flex items-center gap-1.5 rounded-full border border-[var(--border)] bg-[var(--bg-card)] px-2.5 py-1 text-xs font-medium"
+                        style={{ borderLeftColor: t.color, borderLeftWidth: 3 }}
+                      >
+                        <span
+                          className="h-1.5 w-1.5 rounded-full"
+                          style={{ backgroundColor: t.color }}
+                          aria-hidden
+                        />
+                        {t.label}
+                      </span>
+                    ) : null;
+                  })}
+                </div>
+                {product.culturalClassification && (
+                  <p className="text-sm text-[var(--gray-700)]">
+                    <span className="font-medium text-[var(--fg)]">Framework:</span>{" "}
+                    {product.culturalClassification}
+                  </p>
+                )}
+                {product.mechanismSummary && (
+                  <p className="text-sm text-[var(--gray-600)]">
+                    <span className="font-medium text-[var(--fg)]">Mechanism:</span>{" "}
+                    {product.mechanismSummary}
+                  </p>
+                )}
+              </div>
+            )}
             <ProductActions product={product} />
           </div>
         </div>

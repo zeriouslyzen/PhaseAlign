@@ -25,6 +25,12 @@ export interface Product {
   sourceUrl?: string;
   /** e.g. "Temu", "AliExpress", "Alibaba" */
   sourceName?: string;
+  /** Tradition(s) for classification: TCM, Native American, Vedic, Western */
+  traditions?: string[];
+  /** Cultural framework classification (e.g. "Qi tonifying", "Single herb — warming") */
+  culturalClassification?: string;
+  /** Scientific: key molecules, mechanisms. Used on stacks and product detail. */
+  mechanismSummary?: string;
 }
 
 export interface Category {

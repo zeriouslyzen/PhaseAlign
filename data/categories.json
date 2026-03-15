@@ -28,5 +28,11 @@
     "slug": "essentials",
     "name": "Essentials",
     "description": "Water, filters, and the basics. No fluff."
+  },
+  {
+    "id": "single-herb",
+    "slug": "single-herb",
+    "name": "Single herbs",
+    "description": "Single-ingredient botanicals. Build your own blend or use alone. Tradition and mechanism labeled."
   }
 ]

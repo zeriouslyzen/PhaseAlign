@@ -8,6 +8,7 @@ import { NavBarBackground } from "./NavBarBackground";
 
 const baseLinks = [
   { href: "/shop", label: "Shop" },
+  { href: "/stacks", label: "Stacks" },
   { href: "/account", label: "Account" },
 ];
 

@@ -292,7 +292,11 @@ export function LearnContent() {
             viewport={{ once: true }}
           >
             <Link href="/shop" className="font-medium text-[var(--link)] hover:text-[var(--link-hover)]">
-              Shop by category
+              Shop
+            </Link>
+            {" · "}
+            <Link href="/stacks" className="font-medium text-[var(--link)] hover:text-[var(--link-hover)]">
+              Build a stack
             </Link>
             {" · "}
             <Link href="/contact" className="font-medium text-[var(--link)] hover:text-[var(--link-hover)]">
