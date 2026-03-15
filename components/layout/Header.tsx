@@ -66,16 +66,16 @@ export function Header() {
       >
         <NavBarBackground />
       </div>
-      {/* Nav: one flex row so logo and menu are siblings with align-items: center = same horizontal line */}
+      {/* Nav: single row on all viewports – flex-nowrap, logo nowrap so nothing stacks on mobile */}
       <div
-        className="absolute inset-0 z-10 flex overflow-visible px-4 sm:px-6 items-center justify-between"
+        className="absolute inset-0 z-10 flex flex-nowrap overflow-visible px-4 sm:px-6 items-center justify-between"
         style={{ minHeight: headerHeight }}
       >
-        <div className="flex-1 min-w-0" aria-hidden />
-        <div className="logo-wrapper-nav flex items-center justify-center flex-1 min-h-9 min-w-0">
+        <div className="flex-1 min-w-0 shrink-0" aria-hidden />
+        <div className="logo-wrapper-nav flex items-center justify-center flex-1 min-h-9 min-w-0 shrink-0">
           <PhaseAlignmentLogo />
         </div>
-        <div className="flex items-center justify-end flex-1 min-h-9 min-w-0 -mt-5" ref={menuRef}>
+        <div className="flex items-center justify-end flex-1 min-h-9 min-w-0 shrink-0 -mt-5" ref={menuRef}>
           <div className="relative">
             <button
               type="button"

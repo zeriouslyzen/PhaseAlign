@@ -104,6 +104,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  white-space: nowrap; /* keep "Phase Alignment" on one line on mobile */
 }
 
 /* Nav metrics: 8px base unit; use for alignment and spacing */
