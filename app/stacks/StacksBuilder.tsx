@@ -122,27 +122,36 @@ export function StacksBuilder({ products }: StacksBuilderProps) {
 
   return (
     <div className="min-h-screen">
-      <header className="border-b border-[var(--border-strong)] bg-[var(--gray-900)] px-4 py-6 sm:px-6 sm:py-8">
-        <div className="mx-auto max-w-6xl">
-          <nav className="mb-3 text-xs tracking-wider text-white/60 sm:text-sm">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
-            <span className="mx-2">/</span>
-            <Link href="/learn" className="hover:text-white transition-colors">Learn</Link>
-            <span className="mx-2">/</span>
-            <span className="text-white/90">Stacks</span>
-          </nav>
-          <h1 className="font-display text-xl font-bold tracking-tight text-white sm:text-2xl">
-            Build a stack
-          </h1>
-          <p className="mt-1 max-w-xl text-xs text-white/80 sm:text-sm">
-            Filter, add to your stack, then to cart.
-          </p>
-        </div>
-      </header>
+      {/* Sticky: under nav; shadow extends bg upward so no band shows when scrolling */}
+      <div
+        className="sticky z-20 bg-[var(--bg)]"
+        style={{
+          top: "3.5rem",
+          marginTop: "-1px",
+          boxShadow: "0 -8px 0 0 var(--bg)",
+        }}
+      >
+        <header className="border-b border-[var(--border-strong)] bg-[var(--gray-900)] px-4 py-6 sm:px-6 sm:py-8">
+          <div className="mx-auto max-w-6xl">
+            <nav className="mb-3 text-xs tracking-wider text-white/60 sm:text-sm">
+              <Link href="/" className="hover:text-white transition-colors">Home</Link>
+              <span className="mx-2">/</span>
+              <Link href="/learn" className="hover:text-white transition-colors">Learn</Link>
+              <span className="mx-2">/</span>
+              <span className="text-white/90">Stacks</span>
+            </nav>
+            <h1 className="font-display text-xl font-bold tracking-tight text-white sm:text-2xl">
+              Build a stack
+            </h1>
+            <p className="mt-1 max-w-xl text-xs text-white/80 sm:text-sm">
+              Filter, add to your stack, then to cart.
+            </p>
+          </div>
+        </header>
 
-      {/* Filters: one horizontal bar */}
-      <div className="sticky top-[3.5rem] z-20 border-b border-[var(--border)] bg-[var(--bg)] px-4 py-3 sm:px-6">
-        <div className="mx-auto max-w-6xl flex flex-wrap items-center gap-3">
+        {/* Filters: Mode, Tradition, Targets */}
+        <div className="px-4 pt-3 pb-1 sm:px-6">
+          <div className="mx-auto max-w-6xl flex flex-wrap items-center gap-3">
           <span className="text-xs font-medium text-[var(--gray-500)]">Mode</span>
           <div className="flex gap-1">
             {MODES.map((m) => (
@@ -271,9 +280,10 @@ export function StacksBuilder({ products }: StacksBuilderProps) {
           </div>
         </div>
       </div>
+      </div>
 
-      {/* Main: products (left) + stack (right) side by side */}
-      <div className="mx-auto max-w-6xl px-4 py-4 sm:px-6 sm:py-6">
+      {/* Products + stack: scroll with the page; sticky block stays on top */}
+      <div className="mx-auto max-w-6xl px-4 pt-1 pb-4 sm:px-6 sm:pt-1 sm:pb-6">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
           {/* Product list - scrollable, takes space */}
           <div className="min-w-0 flex-1 lg:min-w-[400px]">
@@ -356,8 +366,8 @@ export function StacksBuilder({ products }: StacksBuilderProps) {
             )}
           </div>
 
-          {/* Your stack - sticky sidebar, always visible */}
-          <div className="lg:sticky lg:top-[7.5rem] lg:w-72 lg:shrink-0">
+          {/* Your stack - sticky within scroll area */}
+          <div className="lg:sticky lg:top-0 lg:w-72 lg:shrink-0">
             <div
               className={`rounded-lg border-2 p-4 ${
                 stackProducts.length > 0
