@@ -1,0 +1,32 @@
+[
+  {
+    "id": "herbal-blends",
+    "slug": "herbal-blends",
+    "name": "Herbal Blends",
+    "description": "East meets west. Blends built on tradition and evidence."
+  },
+  {
+    "id": "wholesale-herbs",
+    "slug": "wholesale-herbs",
+    "name": "Wholesale Herbs",
+    "description": "Bulk botanicals for practitioners and makers."
+  },
+  {
+    "id": "performance",
+    "slug": "performance",
+    "name": "Performance & Sports",
+    "description": "Clean formulas for recovery and output."
+  },
+  {
+    "id": "health-tech",
+    "slug": "health-tech",
+    "name": "Health Tech",
+    "description": "Open-source phones, filters, 3D printers. Tools that stay yours."
+  },
+  {
+    "id": "essentials",
+    "slug": "essentials",
+    "name": "Essentials",
+    "description": "Water, filters, and the basics. No fluff."
+  }
+]

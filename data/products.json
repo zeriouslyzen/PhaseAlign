@@ -1,0 +1,83 @@
+[
+  {
+    "id": "adaptogen-blend",
+    "slug": "adaptogen-blend",
+    "name": "Adaptogen Blend",
+    "shortDescription": "Stress response and steady energy. No jitters.",
+    "longDescription": "A blend of rhodiola, ashwagandha, and schisandra. Sourced for potency and tested. East-meets-west formulation for daily use.",
+    "categoryIds": ["herbal-blends"],
+    "price": 3499,
+    "compareAtPrice": 3999,
+    "images": ["/placeholder-product.jpg"],
+    "type": "physical",
+    "wholesale": false
+  },
+  {
+    "id": "sleep-stack",
+    "slug": "sleep-stack",
+    "name": "Sleep Stack",
+    "shortDescription": "Wind down without the hangover.",
+    "longDescription": "Magnesium, l-theanine, and a small amount of melatonin. Designed for sleep quality, not knockout. Non-habit-forming.",
+    "categoryIds": ["herbal-blends", "essentials"],
+    "price": 2899,
+    "images": ["/placeholder-product.jpg"],
+    "type": "physical"
+  },
+  {
+    "id": "bulk-ashwagandha",
+    "slug": "bulk-ashwagandha",
+    "name": "Ashwagandha Root (KSM-66) 1kg",
+    "shortDescription": "Wholesale-grade. One kilogram. Lab-tested.",
+    "longDescription": "KSM-66 ashwagandha in bulk. For practitioners, formulators, or the committed. Certificate of analysis available.",
+    "categoryIds": ["wholesale-herbs"],
+    "price": 12900,
+    "images": ["/placeholder-product.jpg"],
+    "type": "physical",
+    "wholesale": true
+  },
+  {
+    "id": "recovery-blend",
+    "slug": "recovery-blend",
+    "name": "Recovery Blend",
+    "shortDescription": "Post-training. Anti-inflammatory, not a band-aid.",
+    "longDescription": "Turmeric, ginger, and black pepper. Supports recovery and inflammation response. Athlete-tested, no banned substances.",
+    "categoryIds": ["performance", "herbal-blends"],
+    "price": 3199,
+    "images": ["/placeholder-product.jpg"],
+    "type": "physical"
+  },
+  {
+    "id": "open-phone",
+    "slug": "open-phone",
+    "name": "Open Source Phone (PinePhone-style)",
+    "shortDescription": "Your data stays yours. No backdoors.",
+    "longDescription": "Linux-capable, replaceable battery, hardware kill switches. For the health-conscious and situationally aware. Ships with privacy-focused OS options.",
+    "categoryIds": ["health-tech"],
+    "price": 19900,
+    "images": ["/placeholder-product.jpg"],
+    "type": "physical"
+  },
+  {
+    "id": "water-filter",
+    "slug": "water-filter",
+    "name": "Countertop Water Filter",
+    "shortDescription": "Multi-stage. No plumbing. No subscription.",
+    "longDescription": "Removes chlorine, lead, and common contaminants. One-time purchase, replaceable cartridges. Designed for tap water you can trust.",
+    "categoryIds": ["health-tech", "essentials"],
+    "price": 8999,
+    "compareAtPrice": 9999,
+    "images": ["/placeholder-product.jpg"],
+    "type": "physical"
+  },
+  {
+    "id": "3d-printer",
+    "slug": "3d-printer",
+    "name": "Desktop 3D Printer (Open Frame)",
+    "shortDescription": "Repairable. Open firmware. Minimal manufacturing hub.",
+    "longDescription": "Print parts, enclosures, tools. Open-source firmware and design. For makers who want control and longevity.",
+    "categoryIds": ["health-tech"],
+    "price": 34900,
+    "images": ["/placeholder-product.jpg"],
+    "type": "physical"
+  }
+]
