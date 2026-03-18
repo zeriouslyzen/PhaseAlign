@@ -75,7 +75,7 @@ export default function PartnerPage() {
             Affiliate sign-up
           </h1>
           <p className="mt-3 text-base text-[var(--gray-600)]">
-            We're building the partner program now. Discounts, free merch, community backing, education, and direct coach support. Limited slots. If you're a coach, creator, or practitioner who runs physiology-first and wants in, apply below. We're not scaling this forever.
+            We&apos;re building the partner program now. Discounts, free merch, community backing, education, and direct coach support. Limited slots. If you&apos;re a coach, creator, or practitioner who runs physiology-first and wants in, apply below. We&apos;re not scaling this forever.
           </p>
         </header>
 

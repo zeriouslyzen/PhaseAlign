@@ -1,0 +1,15 @@
+---
+description: Always verify UI/layout changes in the browser before marking done
+alwaysApply: true
+---
+
+# Browser verification (required)
+
+For **any** UI, layout, or visual change:
+
+1. **Before finishing:** Use the cursor-ide-browser MCP to verify the change.
+2. **Steps:** Ensure dev server is running (`npm run dev` on port 3000). Navigate to the relevant URL (e.g. `http://localhost:3000/`) or reload the tab, then take a snapshot and screenshot.
+3. **Report:** State explicitly what you saw in the browser (e.g. "Logo is centered; hero visible; no clip"). Do not assume the change applied without checking.
+4. **If the page is blank or wrong:** Fix the cause (build error, wrong port, cache) and re-verify until the page shows the expected content.
+
+Never mark a UI/layout task complete without performing this browser check and documenting the result.

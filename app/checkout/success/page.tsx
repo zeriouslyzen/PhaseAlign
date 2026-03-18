@@ -8,13 +8,11 @@ import { Button } from "@/components/ui/Button";
 function SuccessContent() {
   const searchParams = useSearchParams();
   const { clearCart } = useCart();
-  const [sessionId, setSessionId] = useState<string | null>(null);
+  const id = searchParams.get("session_id");
 
   useEffect(() => {
-    const id = searchParams.get("session_id");
-    setSessionId(id);
     if (id) clearCart();
-  }, [searchParams, clearCart]);
+  }, [id, clearCart]);
 
   return (
     <div className="mx-auto max-w-xl px-4 py-16 sm:px-6 text-center">
@@ -24,9 +22,9 @@ function SuccessContent() {
       <p className="mt-4 text-[var(--gray-600)]">
         Thanks for your order. We’ve sent a receipt to your email.
       </p>
-      {sessionId && (
+      {id && (
         <p className="mt-2 text-sm text-[var(--gray-500)] font-mono">
-          Reference: {sessionId.slice(0, 20)}…
+          Reference: {id.slice(0, 20)}…
         </p>
       )}
       <div className="mt-10 flex flex-wrap justify-center gap-4">

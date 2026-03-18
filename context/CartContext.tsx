@@ -45,9 +45,17 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setItems(loadCart());
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (mounted) {
+      const saved = loadCart();
+      if (saved.length > 0) {
+        setItems(saved);
+      }
+    }
+  }, [mounted]);
 
   useEffect(() => {
     if (!mounted) return;
