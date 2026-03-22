@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { CategoryStrip } from "@/components/sections/CategoryStrip";
 import { ProductGrid } from "@/components/sections/ProductGrid";
 import { getCategories, getProducts, getProductsByCategory } from "@/lib/products";
+import { Product } from "@/lib/types";
 import { ShopFilters } from "./ShopFilters";
 import { ShopSearch } from "./ShopSearch";
 import { canonical } from "@/lib/site";
@@ -20,17 +21,71 @@ export const metadata: Metadata = {
   alternates: { canonical: canonical("/shop") },
 };
 
-type SearchParams = { cat?: string; q?: string };
+type SearchParams = { 
+  cat?: string; 
+  q?: string; 
+  tradition?: string;
+  element?: string;
+  organ?: string;
+  planet?: string;
+  sign?: string;
+};
 
-function filterByQuery(products: Awaited<ReturnType<typeof getProducts>>, q: string | undefined) {
-  if (!q?.trim()) return products;
-  const lower = q.trim().toLowerCase();
-  return products.filter(
-    (p) =>
-      p.name.toLowerCase().includes(lower) ||
-      p.shortDescription.toLowerCase().includes(lower)
-  );
+function filterProducts(
+  products: Product[],
+  params: SearchParams
+) {
+  let filtered = products;
+  const { q, tradition, element, organ, planet, sign } = params;
+
+  if (q?.trim()) {
+    const lower = q.trim().toLowerCase();
+    filtered = filtered.filter(
+      (p) =>
+        p.name.toLowerCase().includes(lower) ||
+        p.shortDescription.toLowerCase().includes(lower)
+    );
+  }
+
+  if (tradition?.trim()) {
+    const t = tradition.trim();
+    filtered = filtered.filter((p) => p.traditions?.includes(t));
+  }
+
+  if (element?.trim()) {
+    const e = element.trim().toLowerCase();
+    filtered = filtered.filter((p) => 
+      p.elements?.tcm?.some((te: string) => te.toLowerCase() === e) || 
+      p.elements?.vedic?.some((ve: string) => ve.toLowerCase() === e) ||
+      p.elements?.tcm?.includes(e) || p.elements?.vedic?.includes(e)
+    );
+  }
+
+  if (organ?.trim()) {
+    const o = organ.trim().toLowerCase();
+    filtered = filtered.filter((p) => 
+      p.organs?.some((org: string) => org.toLowerCase() === o)
+    );
+  }
+
+  if (planet?.trim()) {
+    const pl = planet.trim().toLowerCase();
+    filtered = filtered.filter((p) => 
+      p.astrology?.planets?.some((pnt: string) => pnt.toLowerCase() === pl)
+    );
+  }
+
+  if (sign?.trim()) {
+    const s = sign.trim().toLowerCase();
+    filtered = filtered.filter((p) => 
+      p.astrology?.signs?.some((sg: string) => sg.toLowerCase() === s)
+    );
+  }
+
+  return filtered;
 }
+
+import { ShopHero } from "@/components/sections/ShopHero";
 
 export default async function ShopPage({
   searchParams,
@@ -40,26 +95,24 @@ export default async function ShopPage({
   const params = await searchParams;
   const categories = getCategories();
   const catSlug = typeof params.cat === "string" ? params.cat : undefined;
+  
+  const currentCategory = catSlug ? getCategories().find(c => c.slug === catSlug) : null;
+  const pageTitle = currentCategory ? currentCategory.name : "Shop";
+  const pageDescription = currentCategory 
+    ? `Explore our range of ${currentCategory.name}.`
+    : "Herbs, performance, health tech. Physiology-first.";
+
   const rawProducts = catSlug
     ? getProductsByCategory(catSlug)
     : getProducts();
-  const products = filterByQuery(rawProducts, typeof params.q === "string" ? params.q : undefined);
+  
+  const products = filterProducts(rawProducts, params);
 
   return (
     <div className="min-h-screen">
-      <div className="border-b border-[var(--border)] bg-[var(--bg)] px-4 py-6 sm:px-6">
-        <div className="mx-auto max-w-6xl">
-          <h1 className="font-display text-xl font-bold text-[var(--fg)] sm:text-2xl">
-            Shop
-          </h1>
-          <p className="mt-1 text-sm text-[var(--gray-600)]">
-            Herbs, performance, health tech.
-          </p>
-        </div>
-      </div>
-      <CategoryStrip categories={categories} />
+      <ShopHero title={pageTitle} description={pageDescription} />
       <Suspense fallback={null}>
-        <ShopFilters currentCat={catSlug} />
+        <ShopFilters currentCat={catSlug} categories={categories} />
         <ShopSearch />
       </Suspense>
       <ProductGrid products={products} />

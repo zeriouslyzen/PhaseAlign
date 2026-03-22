@@ -34,5 +34,47 @@
     "slug": "single-herb",
     "name": "Single herbs",
     "description": "Single-ingredient botanicals. Build your own blend or use alone. Tradition and mechanism labeled."
+  },
+  {
+    "id": "extract-powder",
+    "slug": "extract-powder",
+    "name": "Extract Powder",
+    "description": "High potency botanical extracts from the HerbalLink supply chain."
+  },
+  {
+    "id": "gum-and-resin",
+    "slug": "gum-and-resin",
+    "name": "Gum And Resin",
+    "description": "Natural plant gums and resins harvested at peak potency."
+  },
+  {
+    "id": "herbal-powder",
+    "slug": "herbal-powder",
+    "name": "Herbal Powder",
+    "description": "Premium herbal powders for direct human usage or formulation."
+  },
+  {
+    "id": "raw-herbs",
+    "slug": "raw-herbs",
+    "name": "Raw Herbs",
+    "description": "Unprocessed raw botanicals and whole plant matter."
+  },
+  {
+    "id": "root",
+    "slug": "root",
+    "name": "Roots & Rhizomes",
+    "description": "Deep-acting roots and rhizomes."
+  },
+  {
+    "id": "seed",
+    "slug": "seed",
+    "name": "Seeds & Nuts",
+    "description": "Botanical seeds and nuts."
+  },
+  {
+    "id": "shilajit",
+    "slug": "shilajit",
+    "name": "Shilajit",
+    "description": "Pure shilajit resins and extract powders."
   }
 ]

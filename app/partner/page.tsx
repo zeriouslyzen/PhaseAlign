@@ -143,7 +143,7 @@ export default function PartnerPage() {
               <p className="text-sm text-red-600">Something went wrong. Try again or email us directly.</p>
             )}
             {status === "done" && (
-              <p className="text-sm font-medium text-[var(--fg)]">Submitted. We'll be in touch soon.</p>
+              <p className="text-sm font-medium text-[var(--fg)]">Submitted. We&apos;ll be in touch soon.</p>
             )}
             <button
               type="submit"

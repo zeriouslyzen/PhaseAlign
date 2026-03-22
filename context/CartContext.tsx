@@ -45,17 +45,16 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (mounted) {
+    // Use an async-wrapped initialization to avoid synchronous state update warnings
+    const init = async () => {
+      setMounted(true);
       const saved = loadCart();
       if (saved.length > 0) {
         setItems(saved);
       }
-    }
-  }, [mounted]);
+    };
+    init();
+  }, []);
 
   useEffect(() => {
     if (!mounted) return;

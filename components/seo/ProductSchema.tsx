@@ -28,12 +28,14 @@ export function ProductSchema({
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
-    description: product.longDescription || product.shortDescription,
+    description: product.metaDescription || product.longDescription || product.shortDescription,
     image: imageUrl,
     url: productUrl,
+    ...(product.sku ? { sku: product.sku } : {}),
+    ...(product.barcode ? { gtin13: product.barcode } : {}),
     brand: {
       "@type": "Brand",
-      name: "Phase Alignment",
+      name: product.brand || "Phase Alignment",
     },
     offers: {
       "@type": "Offer",

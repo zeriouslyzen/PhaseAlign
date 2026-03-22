@@ -87,7 +87,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${outfit.variable} ${dmSans.variable} ${orbitron.variable} ${syne.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${outfit.variable} ${dmSans.variable} ${orbitron.variable} ${syne.variable}`}>
       <body className="min-h-screen flex flex-col antialiased bg-[var(--bg)]">
         <OrganizationWebSiteSchema />
         <a href="#main-content" className="skip-link">
