@@ -16,6 +16,7 @@ import {
 } from "@/lib/classifications";
 import { ProductSchema } from "@/components/seo/ProductSchema";
 import { canonical } from "@/lib/site";
+import { isProductSlugSafeForStaticGeneration } from "@/lib/slug-filesystem";
 
 function formatPrice(cents: number): string {
   return new Intl.NumberFormat("en-US", {
@@ -25,9 +26,14 @@ function formatPrice(cents: number): string {
   }).format(cents / 100);
 }
 
+/** Long Unicode slugs exceed FS path limits during static generation; those routes render on demand. */
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
   const products = getProducts();
-  return products.map((p) => ({ slug: p.slug }));
+  return products
+    .filter((p) => isProductSlugSafeForStaticGeneration(p.slug))
+    .map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({
