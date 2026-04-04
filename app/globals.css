@@ -71,6 +71,15 @@
   font-family: var(--font-orbitron), ui-monospace, monospace;
 }
 
+@keyframes trust-bar-dot-pulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+.trust-bar-dot {
+  animation: trust-bar-dot-pulse 2s ease-in-out infinite;
+}
+
 @keyframes logo-glow-pulse {
   0%, 100% { filter: drop-shadow(0 0 5px rgba(255,255,255,0.3)) drop-shadow(0 0 10px rgba(255,255,255,0.18)); }
   50% { filter: drop-shadow(0 0 8px rgba(255,255,255,0.45)) drop-shadow(0 0 16px rgba(255,255,255,0.25)); }

@@ -1,9 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import type { Product } from "@/lib/types";
-import { getProductDisplayImage } from "@/lib/product-image";
 
 function formatPrice(cents: number): string {
   return new Intl.NumberFormat("en-US", {
@@ -18,13 +16,9 @@ interface CompactProductCardProps {
   index?: number;
 }
 
-export function CompactProductCard({ product, index = 0 }: CompactProductCardProps) {
+export function CompactProductCard({ product }: CompactProductCardProps) {
   return (
-    <motion.li
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3, delay: index * 0.04 }}
-    >
+    <li>
       <Link
         href={`/products/${product.slug}`}
         className="group flex items-center gap-3 rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--bg-card)] p-3 transition-colors hover:border-[var(--border-strong)] hover:bg-[var(--gray-50)]"
@@ -55,6 +49,6 @@ export function CompactProductCard({ product, index = 0 }: CompactProductCardPro
           →
         </span>
       </Link>
-    </motion.li>
+    </li>
   );
 }

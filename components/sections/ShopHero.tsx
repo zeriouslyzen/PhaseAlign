@@ -23,9 +23,11 @@ function HeroBackgroundImage({ id }: { id: number }) {
 interface ShopHeroProps {
   title: string;
   description?: string;
+  /** Extra line under description (e.g. shop wayfinding). */
+  hint?: string;
 }
 
-export function ShopHero({ title, description }: ShopHeroProps) {
+export function ShopHero({ title, description, hint }: ShopHeroProps) {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -79,6 +81,16 @@ export function ShopHero({ title, description }: ShopHeroProps) {
               transition={{ duration: 0.35, delay: 0.1 }}
             >
               {description}
+            </motion.p>
+          )}
+          {hint && (
+            <motion.p
+              className="mt-2 max-w-2xl text-xs text-white/65 drop-shadow sm:text-sm"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35, delay: 0.14 }}
+            >
+              {hint}
             </motion.p>
           )}
         </div>

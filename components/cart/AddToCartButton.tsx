@@ -25,6 +25,7 @@ export function AddToCartButton({
       slug: product.slug,
       name: product.name,
       price: product.price,
+      productType: product.type,
     });
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);

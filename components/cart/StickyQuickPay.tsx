@@ -21,6 +21,7 @@ export function StickyQuickPay({ product }: StickyQuickPayProps) {
       slug: product.slug,
       name: product.name,
       price: product.price,
+      productType: product.type,
     });
   }
 

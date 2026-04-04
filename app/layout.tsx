@@ -6,6 +6,7 @@ import { SessionProvider } from "@/components/providers/SessionProvider";
 import { ConditionalSiteLayout } from "@/components/layout/ConditionalSiteLayout";
 import { OrganizationWebSiteSchema } from "@/components/seo/OrganizationWebSiteSchema";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { BASE_URL, SITE_NAME, DEFAULT_DESCRIPTION } from "@/lib/site";
 
 const outfit = Outfit({
@@ -89,6 +90,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={`${outfit.variable} ${dmSans.variable} ${orbitron.variable} ${syne.variable}`}>
       <body className="min-h-screen flex flex-col antialiased bg-[var(--bg)]">
+        <GoogleAnalytics />
         <OrganizationWebSiteSchema />
         <a href="#main-content" className="skip-link">
           Skip to main content

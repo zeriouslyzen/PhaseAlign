@@ -1,18 +1,26 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/Button";
+import { trackPurchase } from "@/lib/analytics";
 
 function SuccessContent() {
   const searchParams = useSearchParams();
   const { clearCart } = useCart();
   const id = searchParams.get("session_id");
+  const purchaseFired = useRef(false);
 
   useEffect(() => {
     if (id) clearCart();
   }, [id, clearCart]);
+
+  useEffect(() => {
+    if (!id || purchaseFired.current) return;
+    purchaseFired.current = true;
+    trackPurchase({ transactionId: id });
+  }, [id]);
 
   return (
     <div className="mx-auto max-w-xl px-4 py-16 sm:px-6 text-center">

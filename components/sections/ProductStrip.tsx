@@ -17,7 +17,7 @@ export function ProductStrip({ title, href, products }: ProductStripProps) {
   return (
     <motion.section
       className="border-b border-[var(--border)] py-6 sm:py-8"
-      initial={{ opacity: 0, y: 16 }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.4 }}
@@ -27,7 +27,7 @@ export function ProductStrip({ title, href, products }: ProductStripProps) {
           <div className="mb-4 flex items-center justify-between">
             <motion.h2
               className="font-display text-lg font-bold text-[var(--fg)]"
-              initial={{ opacity: 0, x: -8 }}
+              initial={false}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3 }}

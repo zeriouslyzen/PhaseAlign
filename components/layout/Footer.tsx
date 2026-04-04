@@ -80,6 +80,18 @@ export function Footer() {
             <Link href="/partner" className="text-[var(--link)] hover:text-[var(--link-hover)]">
               Partner
             </Link>
+            <Link href="/shipping" className="text-[var(--link)] hover:text-[var(--link-hover)]">
+              Shipping
+            </Link>
+            <Link href="/returns" className="text-[var(--link)] hover:text-[var(--link-hover)]">
+              Returns
+            </Link>
+            <Link href="/privacy" className="text-[var(--link)] hover:text-[var(--link-hover)]">
+              Privacy
+            </Link>
+            <Link href="/terms" className="text-[var(--link)] hover:text-[var(--link-hover)]">
+              Terms
+            </Link>
           </nav>
         </div>
 

@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import { CategoryStrip } from "@/components/sections/CategoryStrip";
 import { ProductGrid } from "@/components/sections/ProductGrid";
+import { ShopHero } from "@/components/sections/ShopHero";
 import { getCategories, getProducts, getProductsByCategory } from "@/lib/products";
 import { Product } from "@/lib/types";
 import { ShopFilters } from "./ShopFilters";
@@ -85,8 +85,6 @@ function filterProducts(
   return filtered;
 }
 
-import { ShopHero } from "@/components/sections/ShopHero";
-
 export default async function ShopPage({
   searchParams,
 }: {
@@ -108,12 +106,21 @@ export default async function ShopPage({
   
   const products = filterProducts(rawProducts, params);
 
+  const shopHint =
+    "Search by name, pick a quick goal below, or open advanced filters for tradition, support, and celestial tags.";
+
   return (
     <div className="min-h-screen">
-      <ShopHero title={pageTitle} description={pageDescription} />
+      <ShopHero
+        title={pageTitle}
+        description={pageDescription}
+        hint={shopHint}
+      />
       <Suspense fallback={null}>
+        <div className="border-b border-[var(--border)] bg-[var(--bg-card)] py-5 shadow-[0_1px_0_rgba(0,0,0,0.04)]">
+          <ShopSearch />
+        </div>
         <ShopFilters currentCat={catSlug} categories={categories} />
-        <ShopSearch />
       </Suspense>
       <ProductGrid products={products} />
     </div>

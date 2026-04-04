@@ -135,6 +135,18 @@ export default async function ProductPage({
               </div>
             )}
             <ProductActions product={product} />
+            {product.type === "physical" && (
+              <p className="mt-4 text-sm text-[var(--gray-600)]">
+                Fulfilled by our wholesale partner (India export). See{" "}
+                <Link
+                  href="/shipping"
+                  className="text-[var(--link)] hover:text-[var(--link-hover)]"
+                >
+                  Shipping
+                </Link>{" "}
+                for timelines and rates.
+              </p>
+            )}
 
             {/* Energetics & Systems */}
             {(product.organs?.length || product.elements) && (

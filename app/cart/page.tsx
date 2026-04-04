@@ -80,8 +80,16 @@ export default function CartPage() {
             ))}
           </ul>
           <div className="flex flex-col items-end gap-4 border-t border-[var(--border)] pt-6">
+            <p className="max-w-md text-right text-sm text-[var(--gray-600)]">
+              Subtotal shown. Physical items ship from our wholesale partner (India
+              export); address and shipping are confirmed in Stripe Checkout. See{" "}
+              <Link href="/shipping" className="text-[var(--link)] hover:underline">
+                Shipping
+              </Link>
+              .
+            </p>
             <p className="font-display text-xl font-bold text-[var(--foreground)]">
-              Total: {formatPrice(total)}
+              Subtotal: {formatPrice(total)}
             </p>
             <Button href="/checkout" size="lg">
               Checkout

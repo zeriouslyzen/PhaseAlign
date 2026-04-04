@@ -7,7 +7,7 @@ export function CTA() {
   return (
     <motion.section
       className="px-4 py-12 sm:px-6 sm:py-16"
-      initial={{ opacity: 0, y: 12 }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4 }}

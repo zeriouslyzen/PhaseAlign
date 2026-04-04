@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef, Suspense } from "react";
+import Link from "next/link";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { HERBAL_BLENDS_CAT } from "@/lib/shop-intents";
 import { ProductCard } from "@/components/ui/Card";
 import { CompactProductCard } from "@/components/ui/CompactProductCard";
 import type { Product } from "@/lib/types";
@@ -67,8 +69,8 @@ function ProductGridContent({ products, title, className = "" }: ProductGridProp
       transition={{ duration: 0.3 }}
     >
       <div className="mx-auto max-w-6xl">
-        {(title || products.length > 0) && (
-          <div className="mb-6 flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border)] pb-4">
+        <div className="mb-6 flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border)] pb-4">
+          <div className="min-w-0">
             {title && (
               <motion.h2
                 className="font-display text-xl font-bold text-[var(--fg)]"
@@ -79,47 +81,55 @@ function ProductGridContent({ products, title, className = "" }: ProductGridProp
                 {title}
               </motion.h2>
             )}
+            <p
+              className={`text-sm font-semibold text-[var(--fg)] ${title ? "mt-1" : ""}`}
+            >
+              {products.length === 0
+                ? "No matches"
+                : `${products.length} ${products.length === 1 ? "product" : "products"}`}
+            </p>
             {products.length > 0 && (
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-medium text-[var(--gray-500)]">
-                  Showing {Math.min(displayedProducts.length, products.length)} of {products.length}
-                </span>
-                <div className="flex gap-1 rounded-lg border border-[var(--border)] bg-[var(--gray-50)] p-1">
-                  <button
-                    type="button"
-                    onClick={() => updateLayout("grid")}
-                    className={`rounded-md px-3 py-1.5 text-xs font-semibold transition-all duration-200 ${
-                      layout === "grid"
-                        ? "bg-[var(--bg)] text-[var(--fg)] shadow-sm ring-1 ring-[var(--border)]"
-                        : "text-[var(--gray-500)] hover:text-[var(--fg)]"
-                    }`}
-                    aria-label="Grid view"
-                    aria-pressed={layout === "grid" ? "true" : "false"}
-                  >
-                    Grid
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => updateLayout("list")}
-                    className={`rounded-md px-3 py-1.5 text-xs font-semibold transition-all duration-200 ${
-                      layout === "list"
-                        ? "bg-[var(--bg)] text-[var(--fg)] shadow-sm ring-1 ring-[var(--border)]"
-                        : "text-[var(--gray-500)] hover:text-[var(--fg)]"
-                    }`}
-                    aria-label="List view"
-                    aria-pressed={layout === "list" ? "true" : "false"}
-                  >
-                    List
-                  </button>
-                </div>
-              </div>
+              <p className="mt-0.5 text-xs font-medium text-[var(--gray-500)]">
+                Showing {Math.min(displayedProducts.length, products.length)} of{" "}
+                {products.length}
+              </p>
             )}
           </div>
-        )}
+          {products.length > 0 && (
+            <div className="flex gap-1 rounded-lg border border-[var(--border)] bg-[var(--gray-50)] p-1">
+              <button
+                type="button"
+                onClick={() => updateLayout("grid")}
+                className={`rounded-md px-3 py-1.5 text-xs font-semibold transition-all duration-200 ${
+                  layout === "grid"
+                    ? "bg-[var(--bg)] text-[var(--fg)] shadow-sm ring-1 ring-[var(--border)]"
+                    : "text-[var(--gray-500)] hover:text-[var(--fg)]"
+                }`}
+                aria-label="Grid view"
+                aria-pressed={layout === "grid" ? "true" : "false"}
+              >
+                Grid
+              </button>
+              <button
+                type="button"
+                onClick={() => updateLayout("list")}
+                className={`rounded-md px-3 py-1.5 text-xs font-semibold transition-all duration-200 ${
+                  layout === "list"
+                    ? "bg-[var(--bg)] text-[var(--fg)] shadow-sm ring-1 ring-[var(--border)]"
+                    : "text-[var(--gray-500)] hover:text-[var(--fg)]"
+                }`}
+                aria-label="List view"
+                aria-pressed={layout === "list" ? "true" : "false"}
+              >
+                List
+              </button>
+            </div>
+          )}
+        </div>
 
         {products.length === 0 ? (
           <motion.div
-            className="flex flex-col items-center justify-center py-20 text-center"
+            className="flex flex-col items-center justify-center py-16 text-center sm:py-20"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
@@ -128,10 +138,30 @@ function ProductGridContent({ products, title, className = "" }: ProductGridProp
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
-            <h3 className="text-lg font-semibold text-[var(--fg)]">No products found</h3>
-            <p className="mt-1 text-sm text-[var(--gray-500)]">
-              Try adjusting your filters or searching for something else.
+            <h3 className="text-lg font-semibold text-[var(--fg)]">Nothing matches yet</h3>
+            <p className="mt-1 max-w-md text-sm text-[var(--gray-500)]">
+              Loosen or clear filters, try different search words, or browse ready-made blends.
             </p>
+            <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:justify-center">
+              <Link
+                href="/shop"
+                className="inline-flex items-center justify-center rounded-xl bg-[var(--fg)] px-4 py-2.5 text-sm font-semibold text-[var(--bg)] transition-opacity hover:opacity-90"
+              >
+                Clear all filters
+              </Link>
+              <Link
+                href={`/shop?cat=${HERBAL_BLENDS_CAT}`}
+                className="inline-flex items-center justify-center rounded-xl border border-[var(--border)] bg-[var(--bg-card)] px-4 py-2.5 text-sm font-semibold text-[var(--fg)] transition-colors hover:border-[var(--brand)] hover:text-[var(--brand)]"
+              >
+                Browse blends
+              </Link>
+              <Link
+                href="/shop#advanced-filters"
+                className="inline-flex items-center justify-center rounded-xl border border-[var(--border)] px-4 py-2.5 text-sm font-semibold text-[var(--gray-600)] transition-colors hover:border-[var(--fg)] hover:text-[var(--fg)]"
+              >
+                Open advanced filters
+              </Link>
+            </div>
           </motion.div>
         ) : (
           <div className="relative min-h-[400px]">

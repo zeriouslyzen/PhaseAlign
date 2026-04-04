@@ -1,9 +1,13 @@
+import type { ProductType } from "@/lib/types";
+
 export interface CartItem {
   productId: string;
   slug: string;
   name: string;
   price: number;
   quantity: number;
+  /** Omit or legacy carts: treated as physical at checkout for address collection */
+  productType?: ProductType;
 }
 
 export const CART_STORAGE_KEY = "phase-alignment-cart";

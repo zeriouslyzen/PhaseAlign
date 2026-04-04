@@ -1,20 +1,26 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/Button";
 import { formatPrice } from "@/lib/cart";
 
 export default function CheckoutPage() {
-  const router = useRouter();
   const { items, count } = useCart();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const total = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
+
+  const hasPhysical = useMemo(
+    () =>
+      items.some(
+        (i) => i.productType !== "digital"
+      ),
+    [items]
+  );
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -96,8 +102,16 @@ export default function CheckoutPage() {
           ))}
         </ul>
         <p className="mt-4 flex justify-between font-display font-semibold text-[var(--foreground)]">
-          Total: {formatPrice(total)}
+          Subtotal: {formatPrice(total)}
         </p>
+        {hasPhysical && (
+          <p className="mt-2 text-sm text-[var(--gray-600)]">
+            Shipping is calculated on the next step (flat international rate toward
+            India-export fulfillment). Typical partner processing is about 1–3
+            business days; transit often adds roughly 5–8+ business days depending
+            on destination and customs.
+          </p>
+        )}
       </div>
 
       <form onSubmit={handleSubmit} className="mt-8 space-y-6">
@@ -130,6 +144,19 @@ export default function CheckoutPage() {
           {loading ? "Redirecting to payment…" : "Pay with Stripe"}
         </Button>
       </form>
+
+      <p className="mt-4 text-center text-xs text-[var(--gray-500)]">
+        Physical orders are fulfilled by our wholesale partner (India export).
+        By paying you agree to our{" "}
+        <Link href="/shipping" className="text-[var(--link)] hover:underline">
+          Shipping
+        </Link>{" "}
+        and{" "}
+        <Link href="/returns" className="text-[var(--link)] hover:underline">
+          Returns
+        </Link>{" "}
+        terms.
+      </p>
 
       <p className="mt-6 text-center text-sm text-[var(--gray-500)]">
         Card, Cash App, Link (Apple Pay / Google Pay), or crypto. Secure payment via Stripe.
